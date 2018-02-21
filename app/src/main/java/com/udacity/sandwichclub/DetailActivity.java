@@ -39,7 +39,7 @@ public class DetailActivity extends AppCompatActivity {
         Sandwich sandwich = JsonUtils.parseSandwichJson(json);
         if (sandwich == null) {
             // Sandwich data unavailable
-            closeOnError();
+            closeOnError(json);
             return;
         }
 
@@ -54,6 +54,10 @@ public class DetailActivity extends AppCompatActivity {
     private void closeOnError() {
         finish();
         Toast.makeText(this, R.string.detail_error_message, Toast.LENGTH_SHORT).show();
+    }
+    private void closeOnError(String jsn) {
+        finish();
+        Toast.makeText(this, jsn, Toast.LENGTH_SHORT).show();
     }
 
     private void populateUI() {

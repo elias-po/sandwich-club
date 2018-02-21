@@ -2,4 +2,7 @@
 <resources>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="sandwich_detail_padding">5dp</dimen>
+    <dimen name="sandwich_detail_margin">5dp</dimen>
+    <dimen name="sandwich_detail_text_size">12sp</dimen>
 </resources>
