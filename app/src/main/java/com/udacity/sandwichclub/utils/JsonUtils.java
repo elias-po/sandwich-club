@@ -1,18 +1,21 @@
 package com.udacity.sandwichclub.utils;
 
+import android.util.Log;
+
 import com.udacity.sandwichclub.model.Sandwich;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class JsonUtils {
 
     public static Sandwich parseSandwichJson(String json) {
-        String mainName = null;
-        List<String> alsoKnownAs = null;
-        String placeOfOrigin = null;
-        String description = null;
-        String image = null;
-        List<String> ingredients = null;
+        String mainName = "";
+        List<String> alsoKnownAs = new ArrayList<String>();
+        String placeOfOrigin = "";
+        String description = "";
+        String image = "";
+        List<String> ingredients = new ArrayList<String>();
         int curvedBrackets = 0, angledBrackets = 0; // counters to check if all brackets are closed
 
         String temp = "",   // used to store text from inside quotes
@@ -24,7 +27,7 @@ public class JsonUtils {
 
 
         for(int i = 0; i < json.length(); i++){
-            switch (temp){
+            switch (Character.toString(json.charAt(i))){
                 case "{":
                     curvedBrackets++;
                     expectValue = false;
@@ -64,6 +67,7 @@ public class JsonUtils {
                                     image = temp;
                                     break;
                             }
+                            Log.i("temp:",temp);
                             expectValue = false;
                         } else if (expectListItem) {
                             //find the proper variable and assign the value to it
@@ -75,8 +79,10 @@ public class JsonUtils {
                                     ingredients.add(temp);
                                     break;
                             }
+                            Log.i("TEMP",temp);
                         } else {
                             var = temp;
+                            Log.i("VAR",var);
                         }
                         temp = "";
                     } else {
