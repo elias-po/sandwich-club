@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
@@ -14,6 +15,11 @@ public class DetailActivity extends AppCompatActivity {
 
     public static final String EXTRA_POSITION = "extra_position";
     private static final int DEFAULT_POSITION = -1;
+    TextView placeOfOriginTv;
+    TextView descriptionTv;
+    TextView ingredientsTv;
+    TextView alsoKnownAsTv;
+    Sandwich sandwich;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +27,10 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
 
         ImageView ingredientsIv = findViewById(R.id.image_iv);
+        placeOfOriginTv = findViewById(R.id.origin_tv);
+        descriptionTv = findViewById(R.id.description_tv);
+        ingredientsTv = findViewById(R.id.ingredients_tv);
+        alsoKnownAsTv = findViewById(R.id.also_known_tv);
 
         Intent intent = getIntent();
         if (intent == null) {
@@ -36,7 +46,7 @@ public class DetailActivity extends AppCompatActivity {
 
         String[] sandwiches = getResources().getStringArray(R.array.sandwich_details);
         String json = sandwiches[position];
-        Sandwich sandwich = JsonUtils.parseSandwichJson(json);
+        sandwich = JsonUtils.parseSandwichJson(json);
         if (sandwich == null) {
             // Sandwich data unavailable
             closeOnError(json);
@@ -44,6 +54,7 @@ public class DetailActivity extends AppCompatActivity {
         }
 
         populateUI();
+        Toast.makeText(this, sandwich.getImage(), Toast.LENGTH_LONG).show();
         Picasso.with(this)
                 .load(sandwich.getImage())
                 .into(ingredientsIv);
@@ -61,6 +72,21 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void populateUI() {
-
+        if(sandwich.getPlaceOfOrigin() == null){
+            placeOfOriginTv.setText("unknown ¯\\_(ツ)_/¯");
+        } else {
+            placeOfOriginTv.setText(sandwich.getPlaceOfOrigin());
+        }
+        if(sandwich.getDescription() == null){
+            descriptionTv.setText("unknown ¯\\_(ツ)_/¯");
+        } else {
+            descriptionTv.setText(sandwich.getDescription());
+        }
+        for(String item : sandwich.getIngredients()){
+            ingredientsTv.append("* " + item + "\n");
+        }
+        for(String name : sandwich.getAlsoKnownAs()){
+            alsoKnownAsTv.append(name + "\n");
+        }
     }
 }

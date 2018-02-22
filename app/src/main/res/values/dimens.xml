@@ -2,7 +2,19 @@
 <resources>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="sandwich_detail_padding">5dp</dimen>
-    <dimen name="sandwich_detail_margin">5dp</dimen>
-    <dimen name="sandwich_detail_text_size">12sp</dimen>
+    <dimen name="sandwich_detail_padding">8dp</dimen>
+    <dimen name="sandwich_detail_margin">8dp</dimen>
+    <dimen name="sandwich_detail_text_size">16sp</dimen>
+    <dimen name="sandwich_detail_margin_start">16dp</dimen>
+    <dimen name="sandwich_detail_margin_end">16dp</dimen>
+    <dimen name="sandwich_detail_margin_top">4dp</dimen>
+    <dimen name="sandwich_detail_margin_bottom">8dp</dimen>
+
+    <dimen name="sandwich_title_padding">8dp</dimen>
+    <dimen name="sandwich_title_margin">8dp</dimen>
+    <dimen name="sandwich_title_text_size">16sp</dimen>
+    <dimen name="sandwich_title_margin_start">16dp</dimen>
+    <dimen name="sandwich_title_margin_end">16dp</dimen>
+    <dimen name="sandwich_title_margin_top">16dp</dimen>
+    <dimen name="sandwich_title_margin_bottom">4dp</dimen>
 </resources>

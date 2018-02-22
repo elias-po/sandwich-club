@@ -10,18 +10,19 @@ import java.util.List;
 public class JsonUtils {
 
     public static Sandwich parseSandwichJson(String json) {
-        String mainName = "";
+        String mainName = null;
         List<String> alsoKnownAs = new ArrayList<String>();
-        String placeOfOrigin = "";
-        String description = "";
-        String image = "";
+        String placeOfOrigin = null;
+        String description = null;
+        String image = null;
         List<String> ingredients = new ArrayList<String>();
         int curvedBrackets = 0, angledBrackets = 0; // counters to check if all brackets are closed
 
         String temp = "",   // used to store text from inside quotes
                 var = "";   // used to store a name of a variable (that has been acquired from inside quotes)
 
-        boolean closingQuotes = false,  // indicates if the quotes met are the closing ones (or not)
+        boolean ignoreSpecialChar = false, // types the next character like quote or slash instead of registering it's action
+                closingQuotes = false,  // indicates if the quotes met are the closing ones (or not)
                 expectValue = false,    // indicates if the text inside next quotes is a value of a variable
                 expectListItem = false; // indicates if the text inside next quotes is an item of a list
 
@@ -48,8 +49,11 @@ public class JsonUtils {
                     break;
                 case ",":
                     break;
+                case "\\":
+                    ignoreSpecialChar = true;
+                    break;
                 case "\"":
-                    if(closingQuotes){
+                    if(closingQuotes && !ignoreSpecialChar){
                         closingQuotes = false;
                         if(expectValue) {
                             //find the proper variable and assign the value to it
@@ -85,6 +89,9 @@ public class JsonUtils {
                             Log.i("VAR",var);
                         }
                         temp = "";
+                    } else if (ignoreSpecialChar) {
+                        temp += json.charAt(i);
+                        ignoreSpecialChar = false;
                     } else {
                         closingQuotes = true;
                     }
