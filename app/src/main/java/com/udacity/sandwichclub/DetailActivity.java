@@ -83,10 +83,13 @@ public class DetailActivity extends AppCompatActivity {
             descriptionTv.setText(sandwich.getDescription());
         }
         for(String item : sandwich.getIngredients()){
-            ingredientsTv.append("* " + item + "\n");
+            ingredientsTv.append("* " + item + "\n\n");
         }
+        //ingredientsTv.setText((android.text.SpannableStringBuilder)ingredientsTv.getText().subSequence(0, ingredientsTv.getText().length()-2));
+
         for(String name : sandwich.getAlsoKnownAs()){
             alsoKnownAsTv.append(name + "\n");
         }
+        //alsoKnownAsTv.setText((android.text.SpannableStringBuilder)alsoKnownAsTv.getText().subSequence(0, alsoKnownAsTv.getText().length()-1));
     }
 }
