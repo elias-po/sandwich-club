@@ -45,7 +45,10 @@ public class JsonUtils {
                     expectListItem = false;
                     break;
                 case ":":
-                    expectValue = true;
+                    if(closingQuotes)
+                        temp += json.charAt(i);
+                    else
+                        expectValue = true;
                     break;
                 case ",":
                     break;
@@ -101,6 +104,10 @@ public class JsonUtils {
             }
         }
 
+        if (alsoKnownAs.size() == 0)
+            alsoKnownAs = null;
+        if (ingredients.size() == 0)
+            ingredients = null;
         return new Sandwich(mainName, alsoKnownAs, placeOfOrigin, description, image, ingredients);
     }
 }

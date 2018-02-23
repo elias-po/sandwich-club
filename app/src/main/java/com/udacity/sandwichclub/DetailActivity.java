@@ -72,24 +72,34 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void populateUI() {
-        if(sandwich.getPlaceOfOrigin() == null){
-            placeOfOriginTv.setText("unknown ¯\\_(ツ)_/¯");
-        } else {
-            placeOfOriginTv.setText(sandwich.getPlaceOfOrigin());
-        }
-        if(sandwich.getDescription() == null){
-            descriptionTv.setText("unknown ¯\\_(ツ)_/¯");
-        } else {
-            descriptionTv.setText(sandwich.getDescription());
-        }
-        for(String item : sandwich.getIngredients()){
-            ingredientsTv.append("* " + item + "\n\n");
-        }
-        //ingredientsTv.setText((android.text.SpannableStringBuilder)ingredientsTv.getText().subSequence(0, ingredientsTv.getText().length()-2));
+        String unknownMessage = "¯\\_(ツ)_/¯ \n unknown";
 
-        for(String name : sandwich.getAlsoKnownAs()){
-            alsoKnownAsTv.append(name + "\n");
+        if(sandwich.getPlaceOfOrigin() != null){
+            placeOfOriginTv.setText(sandwich.getPlaceOfOrigin());
+        } else {
+            placeOfOriginTv.setText(unknownMessage);
         }
-        //alsoKnownAsTv.setText((android.text.SpannableStringBuilder)alsoKnownAsTv.getText().subSequence(0, alsoKnownAsTv.getText().length()-1));
+        if(sandwich.getDescription() != null){
+            descriptionTv.setText(sandwich.getDescription());
+        } else {
+            descriptionTv.setText(unknownMessage);
+        }
+
+        if(sandwich.getIngredients() != null) {
+            for (String item : sandwich.getIngredients()) {
+                ingredientsTv.append("* " + item + "\n\n");
+            }
+            //ingredientsTv.setText((android.text.SpannableStringBuilder)ingredientsTv.getText().subSequence(0, ingredientsTv.getText().length()-2));
+        } else {
+            ingredientsTv.setText(unknownMessage);
+        }
+        if(sandwich.getAlsoKnownAs() != null) {
+            for (String name : sandwich.getAlsoKnownAs()) {
+                alsoKnownAsTv.append(name + ",\n");
+            }
+            //alsoKnownAsTv.setText((android.text.SpannableStringBuilder)alsoKnownAsTv.getText().subSequence(0, alsoKnownAsTv.getText().length()-1));
+        } else {
+            alsoKnownAsTv.setText(" ---");
+        }
     }
 }
