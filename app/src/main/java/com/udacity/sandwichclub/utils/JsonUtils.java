@@ -11,11 +11,11 @@ public class JsonUtils {
 
     public static Sandwich parseSandwichJson(String json) {
         String mainName = null;
-        List<String> alsoKnownAs = new ArrayList<String>();
+        List<String> alsoKnownAs = new ArrayList<>();
         String placeOfOrigin = null;
         String description = null;
         String image = null;
-        List<String> ingredients = new ArrayList<String>();
+        List<String> ingredients = new ArrayList<>();
         int curvedBrackets = 0, angledBrackets = 0; // counters to check if all brackets are closed
 
         String temp = "",   // used to store text from inside quotes
@@ -74,7 +74,6 @@ public class JsonUtils {
                                     image = temp;
                                     break;
                             }
-                            Log.i("temp:",temp);
                             expectValue = false;
                         } else if (expectListItem) {
                             //find the proper variable and assign the value to it
@@ -86,10 +85,8 @@ public class JsonUtils {
                                     ingredients.add(temp);
                                     break;
                             }
-                            Log.i("TEMP",temp);
                         } else {
                             var = temp;
-                            Log.i("VAR",var);
                         }
                         temp = "";
                     } else if (ignoreSpecialChar) {

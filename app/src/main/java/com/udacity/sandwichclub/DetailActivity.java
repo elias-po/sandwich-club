@@ -37,7 +37,7 @@ public class DetailActivity extends AppCompatActivity {
             closeOnError();
         }
 
-        int position = intent.getIntExtra(EXTRA_POSITION, DEFAULT_POSITION);
+        int position = intent != null ? intent.getIntExtra(EXTRA_POSITION, DEFAULT_POSITION) : DEFAULT_POSITION;
         if (position == DEFAULT_POSITION) {
             // EXTRA_POSITION not found in intent
             closeOnError();
@@ -54,7 +54,6 @@ public class DetailActivity extends AppCompatActivity {
         }
 
         populateUI();
-        Toast.makeText(this, sandwich.getImage(), Toast.LENGTH_LONG).show();
         Picasso.with(this)
                 .load(sandwich.getImage())
                 .into(ingredientsIv);
